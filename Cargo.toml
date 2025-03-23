@@ -1,6 +1,6 @@
 [package]
 name = "rmtrash-mac"
-version = "0.2.0"
+version = "0.2.2"
 edition = "2024"
 authors = ["nyshk <nyshk97@gmail.com>"]
 description = "A safer rm: Move files to the macOS Trash, not permanently delete."
@@ -10,7 +10,7 @@ license = "MIT"
 clap = { version = "4.4", features = ["derive"] }
 core-foundation = "0.9"
 anyhow = "1.0"
-objc = { version = "0.2", features = ["exception"] }
+objc = { version = "0.2.2", features = ["exception"] }
 
 [[bin]]
 name = "rmtrash"
