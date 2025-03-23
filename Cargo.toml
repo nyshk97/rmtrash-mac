@@ -11,3 +11,7 @@ clap = { version = "4.4", features = ["derive"] }
 core-foundation = "0.9"
 anyhow = "1.0"
 objc = { version = "0.2", features = ["exception"] }
+
+[[bin]]
+name = "trash"
+path = "src/main.rs"
