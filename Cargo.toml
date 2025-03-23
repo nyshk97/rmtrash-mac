@@ -1,0 +1,13 @@
+[package]
+name = "rmtrash-mac"
+version = "0.1.0"
+edition = "2021"
+authors = ["Your Name <your.email@example.com>"]
+description = "A command-line tool to move files to macOS trash"
+license = "MIT"
+
+[dependencies]
+clap = { version = "4.4", features = ["derive"] }
+core-foundation = "0.9"
+anyhow = "1.0"
+objc = { version = "0.2", features = ["exception"] }
