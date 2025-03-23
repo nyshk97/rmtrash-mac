@@ -1,9 +1,9 @@
 [package]
 name = "rmtrash-mac"
 version = "0.1.0"
-edition = "2021"
-authors = ["Your Name <your.email@example.com>"]
-description = "A command-line tool to move files to macOS trash"
+edition = "2025"
+authors = ["nyshk <nyshk97@gmail.com>"]
+description = "A safer rm: Move files to the macOS Trash, not permanently delete."
 license = "MIT"
 
 [dependencies]
