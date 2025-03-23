@@ -6,6 +6,9 @@ use core_foundation::base::TCFType;
 use core_foundation::string::CFString;
 use objc::{msg_send, sel, sel_impl, class, runtime::Object};
 
+#[link(name = "Foundation", kind = "framework")]
+extern "C" {}
+
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
 struct Args {
@@ -65,11 +68,27 @@ fn move_to_trash(path: &PathBuf) -> Result<()> {
         false,
     );
 
-    // NSWorkspaceを使用してゴミ箱に移動
     unsafe {
-        let workspace: *mut Object = msg_send![class!(NSWorkspace), sharedWorkspace];
-        let url_ref = url.as_concrete_TypeRef();
-        let _: bool = msg_send![workspace, recycleURLs:&[url_ref] completionHandler:std::ptr::null_mut::<*mut Object>()];
+        let file_manager: *mut Object = msg_send![class!(NSFileManager), defaultManager];
+        let mut error: *mut Object = std::ptr::null_mut();
+
+        let result: bool = msg_send![
+            file_manager,
+            trashItemAtURL:url.as_concrete_TypeRef()
+            resultingItemURL:std::ptr::null_mut::<*mut Object>()
+            error:&mut error
+        ];
+
+        if !result {
+            let error_desc: *mut Object = msg_send![error, localizedDescription];
+            let desc: &str = std::str::from_utf8_unchecked(
+                std::slice::from_raw_parts(
+                    msg_send![error_desc, UTF8String],
+                    msg_send![error_desc, lengthOfBytesUsingEncoding:4]
+                )
+            );
+            anyhow::bail!("ゴミ箱への移動に失敗しました: {}", desc);
+        }
     }
 
     Ok(())
