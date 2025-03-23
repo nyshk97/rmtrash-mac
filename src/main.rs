@@ -13,11 +13,11 @@ extern "C" {}
 #[command(author, version, about, long_about = None)]
 struct Args {
     /// 再帰的に処理する（ディレクトリの場合）
-    #[arg(short = 'r')]
+    #[arg(short = 'r', long = "recursive")]
     recursive: bool,
 
     /// 強制的に処理する（確認なし）
-    #[arg(short = 'f')]
+    #[arg(short = 'f', long = "force")]
     force: bool,
 
     /// 処理対象のパス

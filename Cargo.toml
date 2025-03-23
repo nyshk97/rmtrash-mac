@@ -13,5 +13,5 @@ anyhow = "1.0"
 objc = { version = "0.2", features = ["exception"] }
 
 [[bin]]
-name = "trash"
+name = "rmtrash"
 path = "src/main.rs"
